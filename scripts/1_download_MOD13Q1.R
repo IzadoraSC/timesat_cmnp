@@ -4,6 +4,7 @@ library(phenofit)
 
 # Drought hazard assessment
 
+
 ## Step 4. Preparate R Code
 
 # 
