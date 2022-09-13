@@ -18,7 +18,7 @@ Obtaining, processing and analysis of the NDVI derived from MODIS sensor for obt
   - Click on the Explore tab in appEARS, then on the download button of your request;
   - Select 'All' and 'save the download list'.
  
- ### Step 4: Preparate R Code (Gene
-  - Scrip 1: Download Normalized Difference Vegetation Index MOD13Q1;
- 
+ ### Step 4: Preparate R Code
+  - 4.1 Scrip 1: Download Normalized Difference Vegetation Index MOD13Q1;
+  - 4.2 Scrip 2: Pre-processing;
  
