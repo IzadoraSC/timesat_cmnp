@@ -26,7 +26,7 @@ library(raster)            # Classes and methods for raster data
 # Data path: Enter the path to a folder where you have enough free space to store your 
   # MODIS data and the resulting products. 
 
-dataPath <- "C:/Users/user/Documents/GitHub/timesat_cmnp/data/test/"
+dataPath <- "C:/Users/user/Documents/GitHub/timesat_cmnp/data/MOD13Q1_CMNP_2000-2022/"
 dir()
 # outDir <- file.path("R_output")               # Create an output directory if it doesn't exist
 # suppressWarnings(dir.create(outDir))                 
