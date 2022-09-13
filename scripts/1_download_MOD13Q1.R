@@ -39,7 +39,7 @@ TSpath <-"C:/timesat33/compiled/Win64"
 # Download list path: Enter the path to your appEEARS download-list (including “.txt”!).
   # If you downloaded the data from appEEARS beforehand, enter the path to the data 
   # folder here and comment out the lines for the data download (all downloaded data 
-  # needs to be in one folder).
+  # needs to be in one folder). (this part of the download was done differently)
 
 downloadList <- "C:/Users/user/Documents/GitHub/timesat_cmnp/data/ChapadadasMesasNationalPark-download-list.txt"
 
@@ -99,18 +99,6 @@ remove(user, password, secret, response)                       # Remove the vari
 prettify(token_response)                                       # Print the prettified response
 
 
-###PROVAVELMENTE ESSA PARTE NÃO FUNCIONOU
-# Create a handle
-# s = new_handle()
-# handle_setheaders(s, 'Authorization'=paste("Bearer", fromJSON(token_response)$token))
-
-# prods_req <- GET(paste0(API_URL, "product"))             # Request the info of all products from product service
-# prods_content <- content(prods_req)                      # Retrieve the content of request 
-# all_Prods <- toJSON(prods_content, auto_unbox = TRUE)    # Convert the info to JSON object
-# remove(prods_req, prods_content)                         # Remove the variables that are not needed anymore
-
-
-
 #### This API call will list all of the requests associated with your user account, 
   # automatically sorted by date descending with the most recent requests listed first.
 token <- paste("Bearer", fromJSON(token_response)$token)     # Save login token to a variable
@@ -125,8 +113,7 @@ remove(response_req, response_content)                              # Remove the
 prettify(status_response)                                           # Print the prettified response
 
 #############
-## 
-## By: https://appeears.earthdatacloud.nasa.gov/api/?language=r#download-file
+
 
 #### This API call lists all of the files contained in the bundle which are available 
   # for download.
@@ -155,18 +142,5 @@ for (id in bundle$file_id){
                   write_disk(filepath, overwrite = TRUE), progress(),
                   add_headers(Authorization = token))
 }
-
-
-########################
-
-library(rTIMESAT)
-library(raster)
-library(phenofit)
-
-# library(raster)
-# 
-# img <- raster::raster("C:/Users/user/Downloads/MOD13Q1_CMNP_2000-2022/MOD13Q1.006__250m_16_days_NDVI_doy2000049_aid0001.tif")
-# 
-# plot(img)
 
 
