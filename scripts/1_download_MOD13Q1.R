@@ -44,16 +44,6 @@ TSpath <-"C:/timesat33/compiled/Win64"
 downloadList <- "C:/Users/user/Documents/GitHub/timesat_cmnp/data/ChapadadasMesasNationalPark-download-list.txt"
 
 
-# Enter the hemisphere of your study area: 1 = north; 0 = south. For South Africa set 
-  # hemisphere = 0.
-
-hemisphere <- 0
-
-# Quality masking: set 1 to use MODIS pixel reliability data, set 0 to not use MODIS 
-  # pixel reliability data. The use of quality masking is recommended.
-
-cloudmask <- 1
-
 # Analysis period: Define the period of analysis with a vector of two components. 
   # The first is the starting year and the second the final year. If you want to process
   # all available years just comment the line with a #. In this example all data is used,
@@ -75,7 +65,8 @@ cloudmask <- 1
 #### Create a token by calling AppEEARS API login service. Update the “USERNAME” and
   # “PASSEWORD” with yours below
 # To the sucess this step consult:
-  # file:///C:/Users/user/Downloads/AppEEARS_API_Area_R.html
+  # https://lpdaac.usgs.gov/resources/e-learning/getting-started-appeears-api-r-area-request/
+  # https://lpdaac.usgs.gov/documents/626/AppEEARS_API_Area.html
 
 
 user <- getPass(msg = "Enter NASA Earthdata Login Username: ")         # Enter NASA Earthdata Login Username
