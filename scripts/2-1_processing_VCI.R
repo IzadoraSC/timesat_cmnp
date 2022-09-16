@@ -1,6 +1,5 @@
 ########################
-####### Recommended Practice: Drought monitoring using the 
-####### Vegetation Condition Index (VCI) - R script
+####### Drought monitoring using the Vegetation Condition Index (VCI) - R script
 
 # Carregando pacotes
 
@@ -8,27 +7,13 @@ library(raster)
 library(rgdal)
 library(sp)
 
-readOGR()
-# dir mean
-dataPath <- "C:/Users/user/Documents/GitHub/timesat_cmnp/data"
-
-#insert link to the shapefile with the country borders
-
-border <- readOGR(dsn = path.expand("C:/Users/user/Documents/GitHub/timesat_cmnp/data/shp"),
-                  layer = 'ret_env_modis')
-
-plot(border)
-str(border)
-
-reproj_r2 <- projectRaster(border, crs = exNDVI)
-
-extent(border)
-extent(exNDVI)
+### Step 5: Generating the VCI
+# 5.1 Scrip 2-1: Processing VCI
 
 #enter link to the folder where you have stored the MODIS EVI data
 
 pathData <- "C:/Users/user/Documents/GitHub/timesat_cmnp/data/data_NDVI"
-mydir <- "C:/Users/user/Documents/GitHub/timesat_cmnp/data/data_NDVI/DOY_001"
+# mydir <- "C:/Users/user/Documents/GitHub/timesat_cmnp/data/data_NDVI/DOY_001"
 dlist <- dir(pathData,pattern="DOY")
 
 # enter link to the folder where you have stored the MODIS Pixel Reliability data
@@ -37,143 +22,13 @@ pathData_c <- "C:/Users/user/Documents/GitHub/timesat_cmnp/data/Data_Pixel_Relia
 dlist_c <- dir(pathData_c,pattern="DOY")
 
 
-# List all NDVI rasters (NDVI) and their corresponding pixel reliability 
-# data (NDVIqc).
-NDVI <- list.files(path="C:/Users/user/Documents/GitHub/timesat_cmnp/data/data_NDVI/DOY_001", pattern='.tif$', recursive=F, ignore.case=T, 
-                  full.names=T)
-# NDVIqc <- list.files(path=pathData_c, pattern='.tif$', recursive=F, ignore.case=T, 
-#                      full.names=T)
-# #Showing an example of the downloaded NDVI data
-exNDVI <- raster(NDVI[1])
-plot(exNDVI)
-myExtent <- readOGR(exNDVI, border)
-myExtent <- ?spTRansform(exNDVI, CRS(proj4string(exNDVI)))
+#insert link to the shapefile with the country borders
 
-# 
-# #Showing an example of the corresponding Pixel Reliability
-# exNDVIqc <- raster(NDVIqc[1])
-# plot(exNDVIqc)
+border <- readOGR(dsn = path.expand("C:/Users/user/Documents/GitHub/timesat_cmnp/data/shp"),
+                  layer = 'ret_env_modis')
 
-
-#file.rename(list.files(), paste(as.Date(substr(list.files(),35,41),"%Y%j"),".tif", sep=""))
-#file.rename(list.files(), paste(as.Date(substr(list.files(),1,13),"%Y.%m.%d"), "%Y%j"),".tif", sep=""))
-
-
-## conversao de dias julianos "%Y%j" para "%Y.%m.%d" and rename
-
-li<-as.data.frame(list.files(pattern = ".tif|.TIF"))
-#li$nn<-paste0(substr(li[,1],1,34),format(as.Date(substr(li[,1],35,41), "%Y%j"),"%Y.%m.%d"),substr(li[,1],42,53))
-li$nn <- paste0(gsub(li[,1],1,substr(li[,1],39,41)), "_", substr(li[,1],35,53))
-for (i in 1:nrow(li)){
-  is.pattern = grep(li[i,1],li)
-  if (identical(is.pattern,integer(0)) == FALSE){
-    sapply(li[is.pattern],FUN=function(eachPath){ 
-      file.rename(from=eachPath,to= sub(pattern= li[i,1],replacement = li[i,2],eachPath))
-    })
-  }
-}
-
-#Conversao II
-li<-as.data.frame(list.files(pattern = ".tif|.TIF"))
-li$nn <- paste0(gsub(li[,1],1,substr(li[,1],1,8)), "_", substr(li[,1],20,23))
-
-for (i in 1:nrow(li)){
-  is.pattern = grep(li[i,1],li)
-  if (identical(is.pattern,integer(0)) == FALSE){
-    sapply(li[is.pattern],FUN=function(eachPath){ 
-      file.rename(from=eachPath,to= sub(pattern= li[i,1],replacement = li[i,2],eachPath))
-    })
-  }
-}
-
-
-## Criando pasta
-# Create output folders for masked NDVI and VCI.
-if (!file.exists(paste0(pathData,'/DOY_001')))
-  dir.create(paste0(pathData,'/DOY_001'))
-if (!file.exists(paste0(pathData,'/DOY_017')))
-  dir.create(paste0(pathData,'/DOY_017'))
-if (!file.exists(paste0(pathData,'/DOY_033')))
-  dir.create(paste0(pathData,'/DOY_033'))
-if (!file.exists(paste0(pathData,'/DOY_049')))
-  dir.create(paste0(pathData,'/DOY_033'))
-if (!file.exists(paste0(pathData,'/DOY_049')))
-  dir.create(paste0(pathData,'/DOY_049'))
-if (!file.exists(paste0(pathData,'/DOY_065')))
-  dir.create(paste0(pathData,'/DOY_065'))
-if (!file.exists(paste0(pathData,'/DOY_081')))
-  dir.create(paste0(pathData,'/DOY_081'))
-if (!file.exists(paste0(pathData,'/DOY_097')))
-  dir.create(paste0(pathData,'/DOY_097'))
-if (!file.exists(paste0(pathData,'/DOY_113')))
-  dir.create(paste0(pathData,'/DOY_113'))
-if (!file.exists(paste0(pathData,'/DOY_129')))
-  dir.create(paste0(pathData,'/DOY_129'))
-if (!file.exists(paste0(pathData,'/DOY_145')))
-  dir.create(paste0(pathData,'/DOY_145'))
-if (!file.exists(paste0(pathData,'/DOY_161')))
-  dir.create(paste0(pathData,'/DOY_161'))
-if (!file.exists(paste0(pathData,'/DOY_177')))
-  dir.create(paste0(pathData,'/DOY_177'))
-if (!file.exists(paste0(pathData,'/DOY_193')))
-  dir.create(paste0(pathData,'/DOY_193'))
-if (!file.exists(paste0(pathData,'/DOY_209')))
-  dir.create(paste0(pathData,'/DOY_209'))
-if (!file.exists(paste0(pathData,'/DOY_225')))
-  dir.create(paste0(pathData,'/DOY_225'))
-if (!file.exists(paste0(pathData,'/DOY_241')))
-  dir.create(paste0(pathData,'/DOY_241'))
-if (!file.exists(paste0(pathData,'/DOY_257')))
-  dir.create(paste0(pathData,'/DOY_257'))
-if (!file.exists(paste0(pathData,'/DOY_273')))
-  dir.create(paste0(pathData,'/DOY_273'))
-if (!file.exists(paste0(pathData,'/DOY_289')))
-  dir.create(paste0(pathData,'/DOY_289'))
-if (!file.exists(paste0(pathData,'/DOY_305')))
-  dir.create(paste0(pathData,'/DOY_305'))
-if (!file.exists(paste0(pathData,'/DOY_321')))
-  dir.create(paste0(pathData,'/DOY_321'))
-if (!file.exists(paste0(pathData,'/DOY_337')))
-  dir.create(paste0(pathData,'/DOY_337'))
-if (!file.exists(paste0(pathData,'/DOY_353')))
-  dir.create(paste0(pathData,'/DOY_353'))
-
-
-
-# t4 <- "001_2001001_aid0001.tif"
-# t <- "MOD13Q1.006__250m_16_days_NDVI_doy2000049_aid0001.tif"
-# t <- "MOD13Q1.006__250m_16_days_pixel_reliability_doy2000081_aid0001.tif"
-# str_count(t4)
-# str_locate(t, 'o')
-
-## conversao de dias julianos "%Y%j" para "%Y.%m.%d" and rename (Pixel Reliability)
-setwd(pathData_c)
-
-li<-as.data.frame(list.files(path = pathData_c, pattern = ".tif|.TIF"))
-#li$nn<-paste0(substr(li[,1],1,34),format(as.Date(substr(li[,1],35,41), "%Y%j"),"%Y.%m.%d"),substr(li[,1],42,66))
-li$nn <- paste0(gsub(li[,1],1,substr(li[,1],52,54)), "_", substr(li[,1],48,66))
-for (i in 1:nrow(li)){
-  is.pattern = grep(li[i,1],li)
-  if (identical(is.pattern,integer(0)) == FALSE){
-    sapply(li[is.pattern],FUN=function(eachPath){ 
-      file.rename(from=eachPath,to= sub(pattern= li[i,1],replacement = li[i,2],eachPath))
-    })
-  }
-}
-
-#Conversao II
-li<-as.data.frame(list.files(path = pathData_c, pattern = ".tif|.TIF"))
-li$nn <- paste0(gsub(li[,1],1,substr(li[,1],1,8)), "_", substr(li[,1],20,23))
-
-for (i in 1:nrow(li)){
-  is.pattern = grep(li[i,1],li)
-  if (identical(is.pattern,integer(0)) == FALSE){
-    sapply(li[is.pattern],FUN=function(eachPath){ 
-      file.rename(from=eachPath,to= sub(pattern= li[i,1],replacement = li[i,2],eachPath))
-    })
-  }
-}
-
+plot(border)
+str(border)
 
 #enter the links to the folder where you want to store the resulting .jpg-images and .tif-files.
 
