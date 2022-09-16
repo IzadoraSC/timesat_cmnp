@@ -3,6 +3,7 @@ Obtaining, processing and analysis of the NDVI derived from MODIS sensor for obt
 
 ## To follow the tutorial in detail at: 
   - http://rstudio-pubs-static.s3.amazonaws.com/452032_a5df2d3f782444fc830d43548a304ec5.html#A1
+  - https://rpubs.com/UN-SPIDER/VCI
 
 ### Step 1: Install TIMESAT 
   - http://web.nateko.lu.se/timesat/timesat.asp
@@ -19,6 +20,12 @@ Obtaining, processing and analysis of the NDVI derived from MODIS sensor for obt
   - Select 'All' and 'save the download list'.
  
  ### Step 4: Preparate R Code
-  - 4.1 Scrip 1: Download Normalized Difference Vegetation Index MOD13Q1;
-  - 4.2 Scrip 2: Pre-processing;
+  - Scrip 1: Download Normalized Difference Vegetation Index MOD13Q1;
+  - Scrip 2: Pre-processing;
+ 
+ ### Step 5: Generating the VCI
+  - Scrip 2-1: Processing VCI;
+ 
+ ### Step 6: Prepare TIMESAT
+  
  
