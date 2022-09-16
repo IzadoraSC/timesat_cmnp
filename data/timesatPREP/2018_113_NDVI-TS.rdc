@@ -1,0 +1,24 @@
+file format : IDRISI Raster A.1
+file title  : X113_2018
+data type   : real
+file type   : binary
+columns     : 332
+rows        : 232
+ref. system : latlong
+ref. units  : degrees
+unit dist.  : 1.0000000
+min. X      : -47.429166662
+max. X      : -46.737499995
+min. Y      : -7.370833333
+max. Y      : -6.8875
+pos'n error : unknown
+resolution  : 0.002083333
+min. value  : -999
+max. value  : 0.988
+display min : -999
+display max : 0.988
+value units : unspecified
+value error : unknown
+flag value  : -3.4e+38
+flag def'n  : no data
+legend cats : 0
