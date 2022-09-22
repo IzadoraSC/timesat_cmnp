@@ -27,5 +27,10 @@ Obtaining, processing and analysis of the NDVI derived from MODIS sensor for obt
   - Scrip 2-1: Processing VCI;
  
  ### Step 6: Prepare TIMESAT
+  - Scrip 3: Timesat prepare;
+  - This step we generation the files: files NDVI-MODIS in ".envi" or ".img" or ".bqs", all can be read in software TIMESAT.
+  
+ #### Step 7: Run data in TIMESAT
+  - 
   
  
